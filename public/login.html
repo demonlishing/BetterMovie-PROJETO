@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        async function login(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const result = await response.json();
+            alert(result.message);
+
+            if (result.success) {
+                window.location.href = "#";  // Substitua pelo link do site desejado
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="logo">
+    <img src="assets/079c938044b62cc76dd00370ff1ee73f.png" alt="logo" height="100px">
+    </div>
+    <div class="container">
+
+        <h1>Login</h1>
+
+        <form onsubmit="login(event)">
+            <label for="username">Usuário:</label>
+            <input type="text" id="username"  placeholder="Digite seu usuário" name="username" required><br>
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" placeholder="Digite sua senha" name="password" required><br><br>
+
+            <button type="submit">Entrar</button>
+        </form>
+
+        <br>
+        <a href="register.html">Registrar-se</a>
+    </div>
+</body>
+</html>
